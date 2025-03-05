@@ -9,6 +9,8 @@ import net.javaguide.ems.service.EmployeeService;
 import org.springframework.stereotype.Service;
 
 import java.lang.module.ResolutionException;
+import java.util.stream.Collectors; //
+import java.util.List;
 
 @Service //this tells the spring container to creater spring bean for this class
 @AllArgsConstructor
@@ -30,5 +32,12 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .orElseThrow(() ->
                         new ResolutionException("Exception is not exist with given id: "+ employeeId));
         return EmployeeMapper.mapToEmployeeDto(employee);
+    }
+
+    @Override
+    public List<EmployeeDto> getAllEmployees() {
+       List<Employee> employees =  employeeRepository.findAll();
+       return employees.stream().map((employee) -> EmployeeMapper.mapToEmployeeDto(employee)).collect(Collectors.toList());
+
     }
 }
