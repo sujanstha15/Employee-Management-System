@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import { createEmployee } from '../services/EmployeeService'
+import {useNavigate} from 'react-router-dom'
+
 
 const EmployeeComponent = () => {
 
@@ -7,7 +10,7 @@ const EmployeeComponent = () => {
     const [email, setEmail] = useState('')
     // state varibles are above
 
-
+    const navigator = useNavigate();
 
 
     function handleFirstName(e){
@@ -25,8 +28,14 @@ const EmployeeComponent = () => {
 
     function saveEmployee(e){
         e.preventDefault();
+
         const employee = {firstName, lastName, email};
         console.log(employee);
+
+       createEmployee(employee).then((response) => {
+        console.log(response.data);
+        navigator('/employees');
+       })
     }
 
   return (
@@ -49,7 +58,7 @@ const EmployeeComponent = () => {
                     {/* Email */}
                     <div className='form-group mb-2'>
                         <label className='form-label'>Email: </label>
-                        <input type="password" placeholder='Enter employee Email' name='email' value={email} className='form-control' onChange={handleEmail}/>
+                        <input type="text" placeholder='Enter employee Email' name='email' value={email} className='form-control' onChange={handleEmail}/>
                     </div>
                     <button className='btn btn-success' onClick={saveEmployee}>Submit</button>
                 </form>
