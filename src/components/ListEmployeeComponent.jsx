@@ -65,3 +65,4 @@ const ListEmployeeComponent = () => {
 
 export default ListEmployeeComponent
 //* 1. Create a new component called ListEmployeeComponent.jsx in the src/components directory.
+//streak
