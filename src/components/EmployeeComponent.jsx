@@ -56,21 +56,34 @@ const EmployeeComponent = () => {
         setErrors(errorsCopy);
         return valid;
     }
-
-    function saveEmployee(e){
+//this supports both add employee and update employee operation
+    function saveOrUpdateEmployee(e){
         e.preventDefault();
 
         if(validateForm()){
             const employee = {firstName, lastName, email};
             console.log(employee);
+            //let's write the logic to support update employee operation 
 
-            createEmployee(employee).then((response) => {
-                console.log(response.data);
-                navigator('/employees');
-            }).catch(error => {
-                console.error('Error creating employee:', error);
-            });
-        }
+            if(id){
+                updateEmployee(id, employee).then((response) => {
+                    console.log(response.data);
+                    navigator('/employees');
+                }).catch(error => {
+                    console.error(error);
+                });
+            }
+            
+            else{
+                createEmployee(employee).then((response) => {
+                    console.log(response.data);
+                    navigator('/employees');
+                }).catch(error => {
+                    console.error('Error creating employee:', error);
+                });
+            }
+            }
+         
     }
 
     return (
@@ -118,7 +131,7 @@ const EmployeeComponent = () => {
                                 />
                                 {errors.email && <div className='invalid-feedback'>{errors.email}</div>}
                             </div>
-                            <button className='btn btn-success' onClick={saveEmployee}>Submit</button>
+                            <button className='btn btn-success' onClick={saveOrUpdateEmployee}  >Submit</button>
                         </form>
                     </div>
                 </div>
