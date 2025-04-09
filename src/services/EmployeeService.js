@@ -9,3 +9,5 @@ export const createEmployee = (employee) => axios.post(REST_API_BASE_URL, employ
 //we have written REST client code to call update employee REST API using axios.put method
 
 export const updateEmployee = (employee, id) => axios.put(REST_API_BASE_URL + '/' + id, employee);
+
+//we have written REST client code to call delete employee REST API using axios.delete method
