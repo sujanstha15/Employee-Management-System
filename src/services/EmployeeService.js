@@ -22,4 +22,5 @@ export const createEmployee = (employee) => axios.post(REST_API_BASE_URL, employ
 
 export const getEmployee = (id) => axios.get(`${REST_API_BASE_URL}/${id}`);
 
-export const updateEmployee = (id, employee) => axios.put(`${REST_API_BASE_URL}/${id}`, employee);
+//export const updateEmployee = (id, employee) => axios.put(`${REST_API_BASE_URL}/${id}`, employee);
+export const updateEmployee = (employeeId, employee) => axios.put(`${REST_API_BASE_URL}/${employeeId}`, employee);
